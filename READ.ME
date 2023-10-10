@@ -1,0 +1,47 @@
+###BACGROUND###
+One of the oldest problems of music is how to map the notes of a musical piece to a set of audio frequencies.
+There are various "tuning approaches" that state slightly different ways of assigning notes to a particular frequency.
+This project will require that you write a program that does one particular kin of this mapping.
+
+First,we must define some form of musicial note notation.
+The one common representation is the octpc note notation.
+This notation represents each note as a number pair,where the first number indicates which octave the note belongs to and the second number the note within the octave,
+termed the pitch class.There are 12 semitones within each octave on the keyboard,namely:
+---------------------------------------------
+Note C  C# D  D#  E  F  F#  G  G# A   A#  B
+---------------------------------------------
+Pc   0  1  2  3   4  5  6   7  8  9   10  11
+---------------------------------------------
+
+Octpc representations are often written in decimal format.
+For example 5.9 is the 5th octave,9th semitone.
+We must map sound frequencies to this representation.
+We start by choosing a reference note.
+The reference note frequency mapping is that 4.9(A in the fourth octave) is 440 Hz.
+Every tuning mapping must insure that each note in the next higher octave has a frequency that is twice the previous octave,
+therefore 5.9=>880Hz and 3.9=>220Hz.
+Our tuning system will assume that each of the semitones within an octave is equally spaced,
+that is the distance from one semitone to the next is the same within the octave.
+This is called a Tempered Scale.The formula we use is:
+            (x*2**(o+(m/12)))
+where x is a reference Hz value for a known note,o is the difference(sign matters)in octave between the reference note and the note in question and m is the difference(sign matters) between the reference semitone and the note semitone in question.
+Consider the value for 0.0,C in the first octave,
+which is 4 octaves and 9 semitones below 4.9(A of the 4th octave).
+C0=440*2**(-4+(-9/12))=440*2**(-4.75)=16.35159 Hz
+
+The program will prompt for three octpch pairs,convert each of them to Herzt(Hz),
+print out the values and then play them using the simple Windows Beep function(Windows only).
+
+###PROGRAM SPECIFICATION###
+1.The program will output a brief,descriptive message when it first starts,
+indicating the purpose of the program and the user-required input and output that will be provided.
+2.The program will then prompt for the three octpch pairs,each pair having two integers;
+the octave and the pitch class.
+It will prompt for the octave and pitchclass separately,
+so you do not have to convert 5.9 into the appropriate octave and pitch.
+3.The program will convert each octpch pair(octave and pitchclass),yielding a floating point Hz result.
+4.The program will print the Hz value of three such pairs,along with the original octave and pitchclass values.
+5.**OPTIONAL:The program can then play the three notes using Windows Beep fuction as described at the end of this document.
+It is not required and three are some restrictions.
+
+
